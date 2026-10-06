@@ -1,56 +1,32 @@
-# Welcome to your Expo app 👋
+# Google OAuth in Expo with Appwrite
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+Example app for the [Google OAuth in Expo](https://appwrite.io/blog/post/google-oauth-expo) blog post. It signs users in with Google through Appwrite in an Expo Router app (Expo SDK 57).
 
-## Get started
+## Set up Appwrite
 
-1. Install dependencies
+1. Create a project in the [Appwrite Console](https://appwrite.io/console).
+2. Enable the Google OAuth provider for the project. The [Google sign-in guide](https://appwrite.io/blog/post/setting-up-google-signin) walks through creating the Google OAuth client.
+3. Add an **Android** and an **Apple** platform to the project with the package name and bundle ID `com.example.expo-google-oauth`, or the IDs you set in `app.json`.
+
+## Run the app
+
+1. Install dependencies.
 
    ```bash
    npm install
    ```
 
-2. Start the app
+2. In `src/lib/appwrite.ts`, replace `<ENDPOINT>`, `<PROJECT_ID>`, and `<PACKAGE_NAME>` with your project's endpoint, project ID, and the package name you registered.
+
+3. Start the app, then open it in [Expo Go](https://expo.dev/go), an Android emulator, or an iOS simulator.
 
    ```bash
    npx expo start
    ```
 
-In the output, you'll find options to open the app in a
+## Where the code lives
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
-
-```bash
-npm run reset-project
-```
-
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
-
-### Other setup steps
-
-- To set up ESLint for linting, run `npx expo lint`, or follow our guide on ["Using ESLint and Prettier"](https://docs.expo.dev/guides/using-eslint/)
-- If you'd like to set up unit testing, follow our guide on ["Unit Testing with Jest"](https://docs.expo.dev/develop/unit-testing/)
-- Learn more about the TypeScript setup in this template in our guide on ["Using TypeScript"](https://docs.expo.dev/guides/typescript/)
-
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+- `src/lib/appwrite.ts` creates the Appwrite client.
+- `src/components/AppwriteProvider.tsx` handles sign in with `createOAuth2Token()`, the browser session, and sign out, and shares the user through the `useUser()` hook.
+- `src/app/_layout.tsx` wraps the app in the provider.
+- `src/app/index.tsx` shows the sign-in screen and the signed-in user.
