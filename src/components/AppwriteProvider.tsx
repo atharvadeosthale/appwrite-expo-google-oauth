@@ -8,7 +8,7 @@ import { account } from "../lib/appwrite";
 
 const UserContext = createContext<{
   current: Models.User | null;
-  login: () => Promise<void>;
+  login: (redirectPath?: string) => Promise<void>;
   logout: () => Promise<void>;
 }>({
   current: null,
@@ -86,7 +86,7 @@ export function AppwriteProvider(props: { children: React.ReactNode }) {
 
   useEffect(() => {
     init();
-  }, [user]);
+  }, []);
 
   return (
     <UserContext.Provider value={{ current: user, login, logout }}>
